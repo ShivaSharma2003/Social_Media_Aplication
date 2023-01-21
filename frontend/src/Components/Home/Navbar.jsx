@@ -28,7 +28,7 @@ const Navbar = () => {
 
   if (SettingsNavState) {
     return (
-      <div className="h-12 border-b-2 border-gray-300 shadow-sm flex items-center justify-between gap-2 px-4">
+      <div className="h-12 border-b-2 border-gray-300 shadow-sm flex items-center justify-between gap-2 px-4 tablet:hidden ">
         <HiOutlineLogout
           className="text-2xl cursor-pointer text-gray-700"
           onClick={SettingExistButtonHandler}
@@ -71,7 +71,8 @@ const Navbar = () => {
   }
 
   return (
-    <div className="h-12 border-b-2 border-gray-300 shadow-sm flex items-center justify-between px-4">
+    <>
+    <div className="h-12 border-b-2 border-gray-300 shadow-sm flex items-center justify-between px-4 tablet:hidden">
       <Link to={"/settings"}>
         <HiOutlineCog className="text-2xl cursor-pointer  text-gray-700" />
       </Link>
@@ -82,6 +83,7 @@ const Navbar = () => {
         <HiOutlineChatAlt2 className="text-2xl cursor-pointer text-gray-700 " />
       </Link>
     </div>
+    </>
   );
 };
 

@@ -5,14 +5,14 @@ import { HiDotsVertical } from "react-icons/hi";
 
 const Posts = () => {
   return (
-    <div className="flex-1 overflow-scroll h-full scrollbar-hide flex flex-col items-center px-4 ">
+    <div className="flex-1 overflow-scroll h-full scrollbar-hide flex flex-col items-center px-4 w-full flex-shrink">
       {Data.map((items, key) => {
         return (
           // Parent Div
-          <div className="bg-white flex flex-col justify-center items-start rounded-xl border-b-2 gap-3  border-gray-300 shadow-lg mt-2 py-4 ">
+          <div className="bg-white flex flex-col justify-center items-start rounded-xl border-b-2 gap-3 border-gray-300 shadow-lg mt-2 py-4 ">
             {/* User Account Div  */}
-            <div className="flex flex-row justify-between items-center w-full px-2">
-              <div className="flex flex-row items-center gap-2 ">
+            <div className="flex flex-row justify-around items-center w-full tablet:justify-between tablet:px-2">
+              <div className="flex flex-row items-center gap-2">
                 <img
                   src={items.UserProfileImg}
                   alt="User Profile"
@@ -26,30 +26,36 @@ const Posts = () => {
                 </div>
               </div>
               <div className="mr-4 flex flex-row gap-2 justify-center items-center">
-                <button className="font-bold text-gray-400 hover:text-blue-600 transition-all delay-300 font-sans">
+                <button className="font-bold text-blue-600 transition-all delay-300 font-sans">
                   Follow
                 </button>
                 <HiDotsVertical className=" text-gray-700 cursor-pointer text-xl" />
               </div>
             </div>
             {/* Post Div */}
-            <div className="flex flex-col justify-center items-start gap-2 relative">
-              <img
-                src={items.PostImg}
-                alt="users Images"
-                className=" max-h-[40rem] max-w-[30rem]"
-              />
-              <div className="px-2 flex flex-col gap-1 justify-center items-start">
-                <div className="flex flex-row justify-center items-start gap-4 ">
+            <div className="flex flex-col justify-center items-center gap-2 relative">
+              <div>
+                <img
+                  src={items.PostImg}
+                  alt="users Images"
+                  className=" max-h-[40rem] max-w-[30rem]"
+                />
+              </div>
+              <div className="px-2 flex flex-col gap-1 justify-around items-start w-full ">
+                <div className="flex flex-row justify-start items-start gap-4 w-full ">
                   <BiHeart className="text-xl cursor-pointer text-gray-700 hover:text-pink-800" />
                   <BiComment className="text-xl cursor-pointer text-gray-700" />
                   <BiSend className="text-xl cursor-pointer text-gray-700" />
                 </div>
-                <span className="text-gray-600 text-xs font-semibold cursor-pointer">
-                  Liked by{" "}
-                  <span className="font-bold text-black">{items.likes}</span>{" "}
-                  other peoples
-                </span>
+                <div className="w-full flex flex-row ">
+                  <span className="text-gray-600 text-xs font-semibold cursor-pointer">
+                    Liked by
+                    <span className="font-bold text-black">
+                      {items.likes}
+                    </span>{" "}
+                    other peoples
+                  </span>
+                </div>
                 <div className="flex flex-row items-center justify-center gap-1">
                   <span className="font-bold text-[14px] cursor-pointer ">
                     @{items.UserName}
@@ -58,7 +64,15 @@ const Posts = () => {
                     {items.desc}
                   </span>
                 </div>
-                <span className="text-gray-600 font-semibold text-xs cursor-pointer">veiw all <span className="text-gray-700 font-bold ">{items.TotalComments}</span> comments</span>
+                <div className="flex flex-row items-start ">
+                  <span className="text-gray-600 font-semibold text-xs cursor-pointer">
+                    veiw all{" "}
+                    <span className="text-gray-700 font-bold ">
+                      {items.TotalComments}
+                    </span>{" "}
+                    comments
+                  </span>
+                </div>
                 <div className="flex flex-row gap-2">
                   <img
                     src={items.UserProfileImg}

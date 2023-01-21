@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Avatar from "../../Images/Avatars/Avatar1.jpg";
 import { BiImage, BiVideo, BiCollection } from "react-icons/bi";
 import UserPosts from "../../Data/UserPostsData";
+import { SettingNavDeactive } from "../../Redux/Actions/SettingsNavAction";
+import { useDispatch } from "react-redux";
 
 const ProfileBody = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(SettingNavDeactive());
+  }, [dispatch]);
+
   return (
     <div className="flex-1 w-full p-2 overflow-scroll scrollbar-hide">
       <div className="bg-white rounded-lg flex flex-col gap-3 px-4 py-2 ">

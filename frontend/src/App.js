@@ -11,7 +11,7 @@ import Signup from './Components/Auth/Signup';
 
 function App() {
   return (
-    <div className="App h-[100vh] w-[100vw] relative bg-gray-100 overflow-hidden">
+    <div className="App h-[100vh] w-[100vw] bg-gray-100 overflow-scroll scrollbar-hide  ">
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route exact path='/profile' element={<Profile />} />

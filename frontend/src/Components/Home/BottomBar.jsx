@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const BottomBar = () => {
   return (
-    <div className="h-12 border-t-2 border-gray-300 flex justify-around items-center">
+    <div className="h-12 border-t-2 border-gray-300 flex justify-around items-center tablet:hidden">
       <Link to={"/"}>
         <HiOutlineHome className="font-bold text-2xl cursor-pointer  transition-all duration-300  text-gray-700" />
       </Link>
