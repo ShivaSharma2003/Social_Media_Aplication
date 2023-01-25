@@ -7,7 +7,7 @@ import GenerateToken from '../Token/Token.js'
 const registerController = asyncHandler(async (req, res) => {
     const error = validationResult(req)
     if (!error.isEmpty()) {
-        res.status(403).json({ error: error.array() });
+        res.status(400).json({ error: error.array() });
     }
     try {
         const { email, Password, userName, phoneNumber } = req.body;
@@ -21,7 +21,7 @@ const registerController = asyncHandler(async (req, res) => {
         else {
             const user = await UserModal.create({ email, Password, userName, phoneNumber })
             if (user) {
-                res.status(200).json(user)
+                res.status(200).json({ Message: "SuccessFully Signed Up" })
             }
             else {
                 res.status(500).json({ errorMessage: "Internal Server Error. Try again later." })
@@ -29,7 +29,7 @@ const registerController = asyncHandler(async (req, res) => {
         }
 
     } catch (error) {
-        res.status(500).json({ errorMessage: error.message });
+        res.status(400).json({ errorMessage: error.message });
     }
 })
 
@@ -40,7 +40,7 @@ const loginController = asyncHandler(async (req, res) => {
         const user = await UserModal.findOne({ email })
         if (user) {
             if (await user.ComparePassword(Password)) {
-                res.json({userID : user._id , Token: GenerateToken(user._id)});
+                res.json({ userID: user._id, Token: GenerateToken(user._id) });
             }
             else {
                 res.status(403).json({ errorMessage: "wrong password. Try Again" })

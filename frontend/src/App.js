@@ -6,8 +6,9 @@ import Settings from './Screen/Settings';
 import Search from './Screen/Search';
 import Messenger from './Screen/Messenger';
 import Chat from './Screen/Chat';
-import Login from './Components/Auth/Login';
-import Signup from './Components/Auth/Signup';
+import Auth from './Screen/Auth';
+import Login from "./Components/Auth/Login";
+import SignUp from "./Components/Auth/Signup";
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
         <Route exact path='/search' element={<Search />} />
         <Route exact path='/messenger' element={<Messenger />} />
         <Route exact path='/chat' element={<Chat />} />
-        <Route exact path='/auth/login' element={<Login />} />
-        <Route exact path='/auth/signup' element={<Signup />} />
+        <Route exact path="/auth" element={<Auth />} />
+        <Route exact path="/auth/login" element={<Login />} />
+        <Route exact path="/auth/signup" element={<SignUp />} />
       </Routes>
     </div>
   );

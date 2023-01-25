@@ -1,7 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { RegisterAction } from "../../Redux/Actions/AuthAction";
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const { loading, SignUp, error } = useSelector((state) => state.AuthRegister);
+
+  const [Data, setData] = useState({
+    userName: "",
+    Password: "",
+    email: "",
+    phoneNumber: "",
+  });
+
+  const InputHandler = (e) => {
+    e.preventDefault();
+    setData({ ...Data, [e.target.name]: e.target.value });
+  };
+
+  const signupButtonHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      RegisterAction(Data.userName, Data.email, Data.phoneNumber, Data.Password)
+    );
+  };
+
+  loading
+    ? (document.title = "Loading...")
+    : error
+    ? (document.title = "SignUp Error")
+    : (document.title = "SignUp");
+
   return (
     <div className="flex flex-col h-[100vh] w-[100vw] justify-center items-center gap-4 tablet:grid tablet:grid-cols-12 ">
       <div className="col-span-8 "></div>
@@ -17,29 +47,56 @@ const Signup = () => {
               <input
                 type="text"
                 required
-                placeholder="Phone number, username, or email"
+                placeholder="email Address"
                 className="px-2 py-2 border-2 border-gray-300 bg-gray-200 outline-none text-xs w-full"
+                name="email"
+                onChange={InputHandler}
               />
               <input
                 type="text"
                 required
-                placeholder="Full Name"
+                placeholder="Phone number"
                 className="px-2 py-2 border-2 border-gray-300 bg-gray-200 outline-none text-xs w-full"
+                name="phoneNumber"
+                onChange={InputHandler}
               />
               <input
                 type="text"
                 required
                 placeholder="UserName"
                 className="px-2 py-2 border-2 border-gray-300 bg-gray-200 outline-none text-xs w-full"
+                name="userName"
+                onChange={InputHandler}
               />
               <input
-                type="passowrd"
+                type="password"
                 required
                 placeholder="Password"
                 className="px-2 py-2 border-2 border-gray-300 bg-gray-200 outline-none text-xs w-full "
+                name="Password"
+                onChange={InputHandler}
               />
-              <button className="border-2 bg-[#4DB4F8] w-full py-1 rounded-xl font-bold text-white mt-2 font-mono ">
-                Sign Up
+              {error ? (
+                <span className="text-red-500 text-xs font-bold">
+                  {error.status === 400
+                    ? "All fields are required or Invalid input"
+                    : error.status === 403
+                    ? "Username or Email already taken"
+                    : error.status === 500 &&
+                      "Internal Server Error. Please Try Again Later "}
+                </span>
+              ) : SignUp ? (
+                <span className="text-green-500 text-xs font-bold">
+                  Successfully Signed Up. Pease Login to your new Account
+                </span>
+              ) : (
+                <span className="hidden"></span>
+              )}
+              <button
+                className="border-2 bg-[#4DB4F8] w-full py-1 rounded-xl font-bold text-white mt-2 font-mono "
+                onClick={signupButtonHandler}
+              >
+                {loading ? "Loading..." : "Sign Up"}
               </button>
             </form>
             <hr className="h-[2px] bg-gray-300 " />
