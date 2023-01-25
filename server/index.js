@@ -25,6 +25,7 @@ app.get("/", (req, res) => {
 // Auth Router
 app.use('/auth', AuthRoute)
 app.use('/profile', FollowRoute)
+app.use('/user/post')
 
 // listen on
 app.listen(process.env.PORT, () => {

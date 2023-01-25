@@ -3,6 +3,6 @@ import { FollowController , UnFollowController } from "../Controller/ProfileCont
 import Protect from '../Middleware/Auth/ProtectRoute.js'
 const router = express.Router();
 
-router.route('/follow/:id').post(Protect , FollowController)
+router.route('/follow/:id').post(Protect ,FollowController)
 router.route('/unfollow/:id').post(Protect ,UnFollowController)
 export default router;
