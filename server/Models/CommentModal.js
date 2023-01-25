@@ -4,12 +4,12 @@ const CommentModal = mongoose.Schema(
     {
         userId : 
         {
-            type : String,
+            type : mongoose.Types.ObjectId,
             required : true,
         },
         postId :
         {
-            type : String,
+            type : mongoose.Types.ObjectId,
             required : true,
         },
         body :

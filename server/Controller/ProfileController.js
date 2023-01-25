@@ -40,7 +40,7 @@ const UnFollowController = asyncHandler(async (req, res) => {
         if (req.user._id.toString() !== id) {
             try {
                 if (user.Followers.includes(req.user._id)) {
-                    await user.updateOne({ $pull: { Followers: req.user._id } })
+                    await user.updateOne({ $pull: { Followers: req.user._id} })
                     await req.user.updateOne({ $pull: { Followings: user._id } })
                     res.status(200).json({ Message: "Successfully Unfollowed" })
                 } else {

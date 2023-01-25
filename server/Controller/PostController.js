@@ -6,8 +6,8 @@ import CommentsModal from "../Models/CommentModal.js";
 const PostController = asyncHandler(async (req, res) => {
     const { caption, postItem } = req.body;
     try {
-        const post = await PostModal.create({ userId: req.user._id, postItem, caption });
         const user = await UserModal.findById(req.user._id);
+        const post = await PostModal.create({ userId: req.user._id, postItem, caption });
         if (user && post) {
             res.status(200).json(post)
             await user.updateOne({ $push: { Posts: post._id } })
