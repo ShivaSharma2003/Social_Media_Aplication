@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import cors from "cors";
 import AuthRoute from './Routes/AuthRoute.js'
 import FollowRoute from './Routes/FollowRoute.js'
+import PostRoute from './Routes/PostRoute.js'
 
 dotenv.config();
 const app = express();
@@ -25,7 +26,7 @@ app.get("/", (req, res) => {
 // Auth Router
 app.use('/auth', AuthRoute)
 app.use('/profile', FollowRoute)
-app.use('/user/post')
+app.use('/user', PostRoute)
 
 // listen on
 app.listen(process.env.PORT, () => {

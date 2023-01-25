@@ -37,12 +37,7 @@ const UserModal = mongoose.Schema({
     Followers: [],
     Followings: [],
     TotalPosts: [],
-    Posts:
-    {
-        type: Number,
-        default: 0,
-        required: true,
-    },
+    Posts: [],
     Bio:
     {
         type: String,
