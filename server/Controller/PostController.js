@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler"
 import PostModal from "../Models/PostsModal.js"
 import UserModal from "../Models/UserModal.js";
+import CommentsModal from "../Models/CommentModal.js";
 
 const PostController = asyncHandler(async (req, res) => {
     const { caption, postItem } = req.body;
@@ -77,14 +78,50 @@ const UnlikePostController = asyncHandler(async (req, res) => {
     }
 })
 
-const CommentPostController = asyncHandler(async (req, res)=>
-{
-
+const CommentPostController = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { body } = req.body;
+    try {
+        const post = await PostModal.findById(id);
+        if (post) {
+            const comment = await CommentsModal.create({ userId: req.user._id, postId: post._id, body })
+            if (comment) {
+                res.status(200).json(comment)
+                await post.updateOne({ $push: { Comments: comment._id } })
+            } else {
+                res.status(403).json({ errorMessage: "Internal Server Error" })
+            }
+        } else {
+            res.status(404).json({ errorMessage: "Post Not found" })
+        }
+    } catch (error) {
+        res.status(500).json({ errorMessage: error.message });
+    }
 })
 
-const DeleteCommentController = asyncHandler(async (req, res)=>
-{
-
+const DeleteCommentController = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    try {
+        const comment = await CommentsModal.findById(id);
+        if (comment) {
+            if (comment.userId === req.user._id.toString()) {
+                await CommentsModal.deleteOne({ "_id": comment._id })
+                const post = await PostModal.findById(comment.postId)
+                if (post) {
+                    await post.updateOne({ $pull: { Comments: comment._id } })
+                } else {
+                    res.status(404).json({ errorMessage: "Post Not found" })
+                }
+                res.status(200).json({ Message: "Successfully Delete Comment!" })
+            } else {
+                res.status(403).json({ errorMessage: "Not Authorized User" })
+            }
+        } else {
+            res.status(404).json({ errorMessage: "Comment Not found" })
+        }
+    } catch (error) {
+        res.status(500).json({ errorMessage: error.message });
+    }
 })
 
-export { PostController, DeletePostController, LikePostController, UnlikePostController,CommentPostController,DeleteCommentController }
+export { PostController, DeletePostController, LikePostController, UnlikePostController, CommentPostController, DeleteCommentController }
