@@ -32,17 +32,18 @@ const ProfileBody = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex-1 w-full p-2 overflow-scroll scrollbar-hide">
-      <div className="bg-white rounded-lg flex flex-col gap-3 px-4 py-2 ">
-        <div className="flex flex-row items-center justify-start gap-4">
-          <div>
+    <div className="flex-1 w-full p-2 overflow-scroll scrollbar-hide bg-white ">
+      <div className="bg-transparent rounded-lg flex flex-col gap-3 px-4 py-2 w-full">
+        <div className="flex flex-row items-center justify-start gap-4 w-full tablet:justify-center">
+          <div className="flex flex-row items-center justify-start gap-4 w-full tablet:justify-between tablet:w-[60%]">
+          <div className="tablet:w-[40%]">
             <img
               src={profile?.Avatar}
               alt="Profile Avatar"
               className="rounded-full h-[7rem] w-[7rem] object-cover cursor-pointer"
             />
           </div>
-          <div className="flex flex-col items-center justify-center gap-2">
+          <div className="flex flex-col items-center justify-center gap-2 tablet:w-[60%] tablet:justify-start tablet:items-start ">
             <h3 className="font-bold text-lg cursor-pointer ">
               {`@${profile?.userName}`}
             </h3>
@@ -51,17 +52,21 @@ const ProfileBody = () => {
             </button>
           </div>
         </div>
-        <div className="flex flex-col justify-start items-start gap-1 px-2">
+        </div>
+        <div className="flex flex-col justify-start items-start gap-1 px-2 tablet:justify-center tablet:items-center">
+          <div className='flex flex-col tablet:w-[60%] w-full '>
           <h1 className="text-sm font-bold ">{profile?.FullName}</h1>
           <textarea
-            className="text-xs font-bold w-full resize-none outline-none h-fit max-h-20"
+            className="text-xs font-bold w-full resize-none outline-none h-fit max-h-20 bg-transparent"
             readOnly
           >
             {profile?.Bio}
           </textarea>
+          </div>
         </div>
         <hr />
-        <div className="flex flex-row justify-between items-center px-4 py-2 ">
+        <div className="flex flex-row justify-between items-center px-4 py-2 w-full tablet:justify-center ">
+          <div className='flex flex-row tablet:w-[60%] w-full  justify-between items-center '>
           <div className="flex flex-col justify-center items-center">
             <h2 className="font-bold">Following</h2>
             <h2 className="font-bold text-sm text-gray-700 ">
@@ -81,6 +86,7 @@ const ProfileBody = () => {
             <h2 className="font-bold text-sm text-gray-700 ">
               {profile?.Posts.length}
             </h2>
+          </div>
           </div>
         </div>
         <hr />

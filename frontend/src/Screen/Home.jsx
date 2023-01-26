@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { ProfileNavDeactive } from "../Redux/Actions/ProfileNavAction";
 import { SettingNavDeactive } from "../Redux/Actions/SettingsNavAction";
 import { MessengerNavDeActive } from "../Redux/Actions/MessengerNavAction";
-import Profile from "./Profile";
-import Search from "./Search";
 import Header from "../Components/Header/Header";
 import { useNavigate } from "react-router-dom";
 
