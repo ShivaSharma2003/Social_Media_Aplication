@@ -5,18 +5,18 @@ import { HiDotsVertical } from "react-icons/hi";
 
 const Posts = () => {
   return (
-    <div className="flex-1 overflow-scroll h-full scrollbar-hide flex flex-col items-center px-4 w-full flex-shrink">
+    <div className="flex-1 overflow-scroll h-full w-full scrollbar-hide flex flex-col items-center  flex-shrink border-r-2 ">
       {Data.map((items, key) => {
         return (
           // Parent Div
-          <div className="bg-white flex flex-col justify-center items-start rounded-xl border-b-2 gap-3 border-gray-300 shadow-lg mt-2 py-4 ">
+          <div className="bg-white flex flex-col justify-center items-start rounded-sm border-b-2 gap-4 border-gray-300 shadow-lg mt-2 py-2 w-full ">
             {/* User Account Div  */}
             <div className="flex flex-row justify-around items-center w-full tablet:justify-between tablet:px-2">
-              <div className="flex flex-row items-center gap-2">
+              <div className="flex flex-row items-center gap-2 w-full px-2 ">
                 <img
                   src={items.UserProfileImg}
                   alt="User Profile"
-                  className="h-[2rem] w-[2rem] rounded-full cursor-pointer"
+                  className="h-[2rem] w-[2rem] rounded-full cursor-pointer object-cover "
                 />
                 <div className="flex flex-col ">
                   <span className="font-bold">{items.UserName}</span>
@@ -33,12 +33,12 @@ const Posts = () => {
               </div>
             </div>
             {/* Post Div */}
-            <div className="flex flex-col justify-center items-center gap-2 relative">
-              <div>
+            <div className="flex flex-col justify-center items-center gap-2 relative w-full ">
+              <div className="w-full">
                 <img
                   src={items.PostImg}
                   alt="users Images"
-                  className=" max-h-[40rem] max-w-[30rem]"
+                  className=" max-h-[40rem] w-full object-cover   "
                 />
               </div>
               <div className="px-2 flex flex-col gap-1 justify-around items-start w-full ">
@@ -56,11 +56,11 @@ const Posts = () => {
                     other peoples
                   </span>
                 </div>
-                <div className="flex flex-row items-center justify-center gap-1">
+                <div className="flex flex-row items-center justify-center gap-1 w-full">
                   <span className="font-bold text-[14px] cursor-pointer ">
                     @{items.UserName}
                   </span>
-                  <span className="text-[14px] font-semibold">
+                  <span className="text-[12px] font-semibold truncate w-full ">
                     {items.desc}
                   </span>
                 </div>

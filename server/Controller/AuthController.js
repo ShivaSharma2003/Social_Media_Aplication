@@ -10,7 +10,7 @@ const registerController = asyncHandler(async (req, res) => {
         res.status(400).json({ error: error.array() });
     }
     try {
-        const { email, Password, userName, phoneNumber } = req.body;
+        const { email, Password, userName, phoneNumber, FullName } = req.body;
         const DoesEmailExist = await UserModal.findOne({ email: email })
         const DoesUserNameExist = await UserModal.findOne({ userName: userName })
         if (DoesEmailExist || DoesUserNameExist) {
@@ -19,7 +19,7 @@ const registerController = asyncHandler(async (req, res) => {
             })
         }
         else {
-            const user = await UserModal.create({ email, Password, userName, phoneNumber })
+            const user = await UserModal.create({ email, Password, userName, phoneNumber, FullName })
             if (user) {
                 res.status(200).json({ Message: "SuccessFully Signed Up" })
             }

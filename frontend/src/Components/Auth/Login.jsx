@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { LoginAction } from "../../Redux/Actions/AuthAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Image from '../../Images/Auth/image1.png'
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -35,12 +36,14 @@ const Login = () => {
 
   return (
     <div className="flex flex-col h-[100vh] w-[100vw] justify-center items-center gap-4 tablet:grid tablet:grid-cols-12">
-      <div className="col-span-8 "></div>
+      <div className="col-span-8 hidden h-full w-full justify-center tablet:flex items-center">
+        <img src={Image} alt="AuthenticationImage" className='object-fill'/>
+      </div>
       <div className="flex flex-col col-span-4 h-full w-full justify-center items-center tablet:items-start ">
         <div className="border-2 border-gray-300 shadow-lg h-[60%] w-[60%] tablet:h-full tablet:w-full  bg-white flex flex-col justify-start items-center gap-4">
           <div className="h-[30%] flex flex-col justify-center items-center">
             <h2 className="font-bold text-xl text-black font-sans">
-              Social Media Application
+              Instagram
             </h2>
           </div>
           <div className="w-[80%] flex flex-col justify-center gap-2">

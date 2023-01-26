@@ -35,7 +35,7 @@ const Posts = [
         UserName: "Kunalsharma",
         UserProfileImg: Avatar2,
         PostImg: Post2,
-        desc: "This is a beautiful scenery i Have Ever Seen!",
+        desc: "This is a beautiful scenery i Have Ever Seen duvcsdbvsndvbs isdbvjs isnvivs sfiofv ni isnv!",
         likes: 3000,
         shares: 300,
         TotalComments: 50,

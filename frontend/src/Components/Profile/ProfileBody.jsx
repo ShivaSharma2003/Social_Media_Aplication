@@ -1,12 +1,32 @@
 import React, { useEffect } from "react";
-import Avatar from "../../Images/Avatars/Avatar1.jpg";
-import { BiImage, BiVideo, BiCollection } from "react-icons/bi";
+import { BiImage, BiVideo, BiCollection ,BiUpload } from "react-icons/bi";
 import UserPosts from "../../Data/UserPostsData";
 import { SettingNavDeactive } from "../../Redux/Actions/SettingsNavAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GetProfileAction,
+  GetCurrentProfilePostsAction,
+} from "../../Redux/Actions/ProfileAction";
 
 const ProfileBody = () => {
   const dispatch = useDispatch();
+
+  const { loading, profile } = useSelector((state) => state.Profile);
+  const { posts } = useSelector((state) => state.CurrentProfilePosts);
+
+  console.log(profile?.Bio);
+
+  useEffect(() => {
+    loading
+      ? (document.title = "Loading...")
+      : (document.title = `@${profile?.userName} - Home`);
+  }, [loading, profile?.userName]);
+
+  useEffect(() => {
+    dispatch(GetProfileAction());
+    dispatch(GetCurrentProfilePostsAction());
+  }, [dispatch]);
+
   useEffect(() => {
     dispatch(SettingNavDeactive());
   }, [dispatch]);
@@ -16,11 +36,15 @@ const ProfileBody = () => {
       <div className="bg-white rounded-lg flex flex-col gap-3 px-4 py-2 ">
         <div className="flex flex-row items-center justify-start gap-4">
           <div>
-            <img src={Avatar} alt="Profile Avatar" className="rounded-full " />
+            <img
+              src={profile?.Avatar}
+              alt="Profile Avatar"
+              className="rounded-full h-[7rem] w-[7rem] object-cover cursor-pointer"
+            />
           </div>
           <div className="flex flex-col items-center justify-center gap-2">
             <h3 className="font-bold text-lg cursor-pointer ">
-              @ShivaSharma9090
+              {`@${profile?.userName}`}
             </h3>
             <button className="border-2 border-gray-500 w-40 px-4 py-2 rounded-md font-bold text-gray-700  ">
               Edit Profile
@@ -28,32 +52,35 @@ const ProfileBody = () => {
           </div>
         </div>
         <div className="flex flex-col justify-start items-start gap-1 px-2">
-          <h1 className="text-sm font-bold ">Shiva Sharma</h1>
+          <h1 className="text-sm font-bold ">{profile?.FullName}</h1>
           <textarea
-            className="text-xs font-semibold w-full resize-none outline-none h-20"
+            className="text-xs font-bold w-full resize-none outline-none h-fit max-h-20"
             readOnly
           >
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum eum,
-            magni commodisbucgdauc udvcysbd Lorem ipsum dolor sit amet
-            consectetur, adipisicing elit. Quaerat est autem repudiandae veniam
-            illo sapiente provident reprehenderit iste esse tenetur.
+            {profile?.Bio}
           </textarea>
         </div>
         <hr />
         <div className="flex flex-row justify-between items-center px-4 py-2 ">
           <div className="flex flex-col justify-center items-center">
             <h2 className="font-bold">Following</h2>
-            <h2 className="font-bold text-sm text-gray-700 ">100</h2>
+            <h2 className="font-bold text-sm text-gray-700 ">
+              {profile?.Followings.length}
+            </h2>
           </div>
           <div className="border-r-2 h-10 border-gray-300 " />
           <div className="flex flex-col justify-center items-center">
             <h2 className="font-bold">Followers</h2>
-            <h2 className="font-bold text-sm text-gray-700 ">190</h2>
+            <h2 className="font-bold text-sm text-gray-700 ">
+              {profile?.Followers.length}
+            </h2>
           </div>
           <div className="border-r-2 h-10 border-gray-300 " />
           <div className="flex flex-col justify-center items-center">
             <h2 className="font-bold">Posts</h2>
-            <h2 className="font-bold text-sm text-gray-700 ">23</h2>
+            <h2 className="font-bold text-sm text-gray-700 ">
+              {profile?.Posts.length}
+            </h2>
           </div>
         </div>
         <hr />
@@ -64,19 +91,26 @@ const ProfileBody = () => {
             <BiCollection className="text-2xl text-gray-700  cursor-pointer " />
           </div>
           <hr />
-          <div className="flex flex-row flex-wrap flex-shrink gap-2 justify-center items-center">
-            {UserPosts.map((item, key) => {
-              return (
-                <div>
-                  <img
-                    src={item.img}
-                    alt=""
-                    className="object-cover sm:h-[10rem] sm:w-[10rem] h-[8rem] w-[8rem]"
-                  />
-                </div>
-              );
-            })}
-          </div>
+          {posts?.length === 0 ? (
+            <div className="flex flex-col flex-wrap flex-shrink gap-2 justify-center items-center h-40 ">
+              <h1 className="font-semibold text-gray-500 text-lg">Share Posts</h1>
+              <BiUpload className='text-gray-500 text-3xl '/>
+            </div>
+          ) : (
+            <div className="flex flex-row flex-wrap flex-shrink gap-2 justify-center items-center">
+              {posts?.map((item, key) => {
+                return (
+                  <div className='cursor-pointer hover:scale-105 transition-all duration-500'>
+                    <img
+                      src={item.postItem}
+                      alt=""
+                      className="object-cover sm:h-[10rem] sm:w-[10rem] h-[8rem] w-[8rem] hover:rounded-lg"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>

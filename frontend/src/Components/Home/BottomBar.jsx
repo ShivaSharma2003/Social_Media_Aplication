@@ -3,8 +3,8 @@ import {
   HiOutlineHome,
   HiOutlineSearch,
   HiOutlineUserCircle,
-  HiOutlineHeart,
   HiOutlinePlusCircle,
+  HiOutlineChatAlt,
 } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
@@ -18,7 +18,9 @@ const BottomBar = () => {
       <HiOutlineSearch className="font-bold text-2xl cursor-pointer  transition-all duration-300  text-gray-700" />
       </Link>
       <HiOutlinePlusCircle className="font-bold text-2xl cursor-pointer  transition-all duration-300  text-gray-700" />
-      <HiOutlineHeart className="font-bold text-2xl cursor-pointer  transition-all duration-30  text-gray-700" />
+      <Link to={'/messenger'}>
+      <HiOutlineChatAlt className="font-bold text-2xl cursor-pointer  transition-all duration-30  text-gray-700" />
+      </Link>
       <Link to={"/profile"}>
         <HiOutlineUserCircle className="font-bold text-2xl cursor-pointer  transition-all duration-300 text-gray-700" />
       </Link>

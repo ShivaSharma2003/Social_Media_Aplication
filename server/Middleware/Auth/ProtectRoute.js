@@ -12,11 +12,11 @@ const Protect = asyncHandler(async (req, res, next) => {
             next()
         } catch (error) {
             console.log(error)
-            res.status(403).json({ message: 'Invalid token' })
+            res.status(401).json({ message: 'Invalid token' })
         }
     }
     else {
-        res.status(404).json({ errorMessage: "Token not found. You must login first to your Account." })
+        res.status(403).json({ errorMessage: "Token not found. You must login first to your Account." })
     }
     if (!token) {
         res.status(401);

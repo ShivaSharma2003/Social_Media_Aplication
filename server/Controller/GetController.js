@@ -3,6 +3,19 @@ import UserModal from '../Models/UserModal.js';
 import PostModal from '../Models/PostsModal.js';
 import mongoose from 'mongoose';
 
+const GetCurrentUserPosts = asyncHandler(async (req, res) => {
+    try {
+        const Posts = await PostModal.find({ userId: req.user.id })
+        if (Posts) {
+            res.status(200).json(Posts)
+        } else {
+            res.status(403).json({ errorMessage: "Not Authorized" })
+        }
+    } catch (error) {
+        res.status(500).json({ errorMessage: error.message });
+    }
+})
+
 const GetTimelineController = asyncHandler(async (req, res) => {
     try {
         const user = await UserModal.findOne(req.user._id)
@@ -70,4 +83,4 @@ const GetProfileByIdController = asyncHandler(async (req, res) => {
     }
 })
 
-export { GetTimelineController,GetProfileByIdController,GetProfileController }
+export { GetTimelineController, GetProfileByIdController, GetProfileController,GetCurrentUserPosts }

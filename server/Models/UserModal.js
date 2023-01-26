@@ -13,6 +13,14 @@ const UserModal = mongoose.Schema({
         required: true,
         select: true,
     },
+    
+    FullName :
+    {
+        type : String,
+        required: true,
+        select : true,
+    },
+
     email:
     {
         type: String,

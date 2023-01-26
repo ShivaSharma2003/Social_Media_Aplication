@@ -33,17 +33,16 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className="flex flex-col h-full tablet:grid grid-cols-12 tablet:flex-row tablet:justify-around gap-2 tablet-overflow-scroll ">
-        <div className="hidden laptop:flex laptop:col-span-3 laptop:col-start-2 w-full h-full overflow-scroll scrollbar-hide ">
-          <Profile />
-        </div>
-        <div className="flex flex-col tablet:col-span-8 laptop:col-span-4 h-full overflow-scroll scrollbar-hide ">
+      <div className="flex flex-col tablet:col-span-8 laptop:col-span-4 h-full w-full tablet:justify-center tablet:items-center overflow-scroll scrollbar-hide ">
+        <div className="flex flex-col tablet:flex-row tablet:col-span-8 laptop:col-span-4 tablet:w-[80%] laptop:w-[60%] h-full tablet:justify-between tablet:items-center overflow-scroll scrollbar-hide gap-2 ">
+          <div className='h-full tablet:w-[70%] laptop:w-[60%] flex flex-col '>
           <Navbar />
           <Posts />
           <BottomBar />
-        </div>
-        <div className="hidden tablet:flex tablet:col-span-4 laptop:col-span-3 w-full h-full overflow-scroll scrollbar-hide ">
-          <Search />
+          </div>
+          <div className='hidden tablet:flex tablet:w-[30%] laptop:w-[40%] '> 
+            this is another side 
+          </div>
         </div>
       </div>
     </>

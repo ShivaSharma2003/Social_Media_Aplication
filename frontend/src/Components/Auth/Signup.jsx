@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RegisterAction } from "../../Redux/Actions/AuthAction";
+import Image from '../../Images/Auth/image1.png'
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Signup = () => {
     Password: "",
     email: "",
     phoneNumber: "",
+    FullName: "",
   });
 
   const InputHandler = (e) => {
@@ -22,7 +24,13 @@ const Signup = () => {
   const signupButtonHandler = (e) => {
     e.preventDefault();
     dispatch(
-      RegisterAction(Data.userName, Data.email, Data.phoneNumber, Data.Password)
+      RegisterAction(
+        Data.userName,
+        Data.email,
+        Data.phoneNumber,
+        Data.Password,
+        Data.FullName
+      )
     );
   };
 
@@ -34,12 +42,14 @@ const Signup = () => {
 
   return (
     <div className="flex flex-col h-[100vh] w-[100vw] justify-center items-center gap-4 tablet:grid tablet:grid-cols-12 ">
-      <div className="col-span-8 "></div>
+      <div className="col-span-8 hidden h-full w-full justify-center tablet:flex items-center">
+        <img src={Image} alt="AuthenticationImage" className="object-fill" />
+      </div>
       <div className="flex flex-col col-span-4 h-full w-full justify-center items-center tablet:items-start ">
         <div className="border-2 border-gray-300 shadow-lg h-[60%] w-[60%] tablet:h-full tablet:w-full  bg-white flex flex-col justify-start items-center gap-4">
           <div className="h-[30%] flex flex-col justify-center items-center">
             <h2 className="font-bold text-xl text-black font-sans">
-              Social Media Application
+              Instagram
             </h2>
           </div>
           <div className="w-[80%] flex flex-col justify-center gap-2">
@@ -69,6 +79,14 @@ const Signup = () => {
                 onChange={InputHandler}
               />
               <input
+                type="text"
+                required
+                placeholder="Full Name"
+                className="px-2 py-2 border-2 border-gray-300 bg-gray-200 outline-none text-xs w-full"
+                name="FullName"
+                onChange={InputHandler}
+              />
+              <input
                 type="password"
                 required
                 placeholder="Password"
@@ -86,8 +104,8 @@ const Signup = () => {
                       "Internal Server Error. Please Try Again Later "}
                 </span>
               ) : SignUp ? (
-                <span className="text-green-500 text-xs font-bold">
-                  Successfully Signed Up. Pease Login to your new Account
+                <span className="text-green-700 text-xs font-bold">
+                  Successfully Account Created
                 </span>
               ) : (
                 <span className="hidden"></span>
