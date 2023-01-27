@@ -9,10 +9,18 @@ import Chat from './Screen/Chat';
 import Auth from './Screen/Auth';
 import Login from "./Components/Auth/Login";
 import SignUp from "./Components/Auth/Signup";
+import SearchModal from './Components/Model/SearchModal'
+import SettingsModal from './Components/Model/SettingsModal'
+import ActivityModal from "./Components/Model/ActivityModal"
+import PostUploadModal from './Components/Model/PostUpload'
 
 function App() {
   return (
-    <div className="App h-[100vh] w-[100vw] bg-gray-100 overflow-scroll scrollbar-hide  ">
+    <div className="App h-[100vh] w-[100vw] bg-gray-100 overflow-scroll scrollbar-hide  relative">
+      <SearchModal />
+      <SettingsModal />
+      <ActivityModal />
+      <PostUploadModal />
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route exact path='/profile' element={<Profile />} />

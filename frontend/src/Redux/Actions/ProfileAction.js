@@ -14,6 +14,7 @@ const GetProfileAction = () => async (dispatch, getState) => {
 
         dispatch({ type: GET_PROFILE_REQUEST })
         const { data } = await Axios.get('get/profile', config)
+        sessionStorage.setItem('userProfile', JSON.stringify(data))
         dispatch({ type: GET_PROFILE_SUCCESS, payload: data })
 
     } catch (error) {
@@ -32,6 +33,7 @@ const GetCurrentProfilePostsAction = () => async (dispatch, getState) => {
     try {
         dispatch({ type: GET_CURRENT_PROFILE_POSTS_REQUEST })
         const { data } = await Axios.get('get/profile/posts', config)
+        sessionStorage.setItem("userPosts", JSON.stringify(data))
         dispatch({ type: GET_CURRENT_PROFILE_POSTS_SUCCESS, payload: data })
     } catch (error) {
         dispatch({ type: GET_CURRENT_PROFILE_POSTS_FAILS, error: error.response })

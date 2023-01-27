@@ -1,6 +1,6 @@
 import { AUTH_LOGIN_FAILS, AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_REGISTER_FAILS, AUTH_REGISTER_REQUEST, AUTH_REGISTER_SUCCESS } from '../Constant/AuthConstant'
 
-const AuthLoginReducer = (state = { Login: false }, action) => {
+const AuthLoginReducer = (state = { loading: false, Token: null, Login: false }, action) => {
     switch (action.type) {
         case AUTH_LOGIN_REQUEST:
             return { loading: true }

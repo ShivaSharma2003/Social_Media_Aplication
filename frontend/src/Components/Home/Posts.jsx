@@ -5,7 +5,7 @@ import { HiDotsVertical } from "react-icons/hi";
 
 const Posts = () => {
   return (
-    <div className="flex-1 overflow-scroll h-full w-full scrollbar-hide flex flex-col items-center  flex-shrink border-r-2 ">
+    <div className="flex-1 overflow-scroll h-full w-full scrollbar-hide flex flex-col items-center flex-shrink border-r-2 ">
       {Data.map((items, key) => {
         return (
           // Parent Div
