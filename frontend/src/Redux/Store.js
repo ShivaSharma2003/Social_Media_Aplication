@@ -2,8 +2,10 @@ import thunk from 'redux-thunk'
 import { combineReducers, applyMiddleware, configureStore } from '@reduxjs/toolkit'
 import { composeWithDevTools } from '@redux-devtools/extension'
 import { AuthLoginReducer, AuthRegisterReducer } from './Reducers/AuthReducer'
-import { GetProfileReducer, GetCurrentProfilePostsReducer } from './Reducers/ProfileReducer'
+import { GetProfileReducer, GetCurrentProfilePostsReducer,FollowUserReducer,UnfollowUserReducer } from './Reducers/ProfileReducer'
 import { SearchModalReducer, SettingsModalReducer, ActivityModalReducer, PostUploadModalReducer } from './Reducers/ModalSReducer'
+import {SuggestedUserProfilereducer} from './Reducers/AnotherUserProfileReducer'
+import {TimePostsReducers} from './Reducers/TimelinePostsReducer'
 
 const LoginUserFromStorage = localStorage.getItem("LoginUser") ? JSON.parse(localStorage.getItem("LoginUser")) : {}
 const UserProfileFromStorage = sessionStorage.getItem("userProfile") ? JSON.parse(sessionStorage.getItem("userProfile")) : {}
@@ -22,6 +24,10 @@ const reducer = combineReducers({
     SettingsModal: SettingsModalReducer,
     ActivityModal: ActivityModalReducer,
     PostUploadModal: PostUploadModalReducer,
+    SuggestedProfile : SuggestedUserProfilereducer,
+    TimelinePosts : TimePostsReducers,
+    FollowUser : FollowUserReducer,
+    UnFollow : UnfollowUserReducer,
 })
 
 const InitialState = {

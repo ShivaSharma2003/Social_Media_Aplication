@@ -1,4 +1,5 @@
 import { GET_PROFILE_SUCCESS, GET_PROFILE_REQUEST, GET_PROFILE_FAILS, GET_CURRENT_PROFILE_POSTS_FAILS, GET_CURRENT_PROFILE_POSTS_REQUEST, GET_CURRENT_PROFILE_POSTS_SUCCESS } from '../Constant/ProfileConstant'
+import { FOLLOW_USER_FAILS, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAILS, UNFOLLOW_USER_REQUEST, UNFOLLOW_USER_SUCCESS } from '../Constant/ProfileConstant'
 
 const GetProfileReducer = (state = {}, action) => {
     switch (action.type) {
@@ -26,4 +27,30 @@ const GetCurrentProfilePostsReducer = (state = {}, action) => {
     }
 }
 
-export { GetProfileReducer,GetCurrentProfilePostsReducer}
+const FollowUserReducer = (state = [], action) => {
+    switch (action.type) {
+        case FOLLOW_USER_REQUEST:
+            return { loading: true }
+        case FOLLOW_USER_SUCCESS:
+            return { loading: false, Followings: action.payload }
+        case FOLLOW_USER_FAILS:
+            return { loading: false, error: action.error }
+        default:
+            return state
+    }
+}
+
+const UnfollowUserReducer = (state = {}, action) => {
+    switch (action.type) {
+        case UNFOLLOW_USER_REQUEST:
+            return { loading: true }
+        case UNFOLLOW_USER_SUCCESS:
+            return { loading: false, unfollowings: action.payload }
+        case UNFOLLOW_USER_FAILS:
+            return { loading: false, error: action.error }
+        default:
+            return state;
+    }
+}
+
+export { GetProfileReducer, GetCurrentProfilePostsReducer, FollowUserReducer, UnfollowUserReducer }

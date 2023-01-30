@@ -4,7 +4,7 @@ import ExploreData from "../../Data/ExploreData";
 
 const SearchBody = () => {
   return (
-    <div className="flex-1 overflow-scroll h-full gap-2 flex flex-col justify-start items-start scrollbar-hide p-4 bg-white rounded-lg my-2 ">
+    <div className="flex-1 overflow-scroll h-full w-full gap-2 flex flex-col justify-start items-start scrollbar-hide bg-white rounded-lg my-2 ">
       <form className="flex flex-row justify-between items-center bg-white w-full px-4 ">
         <input
           type="text"
@@ -23,19 +23,21 @@ const SearchBody = () => {
                   <img
                     src={item.UserImg}
                     alt="Emplore User"
-                    className="rounded-full max-h-12 max-w-12 tablet:h-10 tablet:w-10"
+                    className="object-fill h-10 w-10 rounded-full "
                   />
                 </div>
                 <div className="flex flex-col justify-start items-start">
-                  <h1 className="font-bold truncate">
+                  <h1 className="text-sm font-bold text-gray-800 truncate">
                     @{item.userName}
                   </h1>
-                  <h6 className="font-bold text-[12px]">{item.tag}</h6>
+                  <h6 className="text-xs font-semibold text-gray-600 ">
+                    Shiva Sharma
+                  </h6>
                 </div>
               </div>
 
               <div className="flex flex-row justify-center items-center h-full px-4">
-                <button className="font-bold text-[14px] text-blue-600">
+                <button className="font-bold text-sm text-blue-600">
                   Follow
                 </button>
               </div>

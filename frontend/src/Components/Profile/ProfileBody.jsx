@@ -6,13 +6,12 @@ import {
   BiUpload,
   BiCog,
 } from "react-icons/bi";
-import { SettingNavDeactive } from "../../Redux/Actions/SettingsNavAction";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetProfileAction,
   GetCurrentProfilePostsAction,
 } from "../../Redux/Actions/ProfileAction";
-import {OpenSettingsModalAction} from '../../Redux/Actions/ModalAction'
+import { OpenSettingsModalAction } from "../../Redux/Actions/ModalAction";
 
 const ProfileBody = () => {
   const dispatch = useDispatch();
@@ -30,15 +29,10 @@ const ProfileBody = () => {
     dispatch(GetCurrentProfilePostsAction());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(SettingNavDeactive());
-  }, [dispatch]);
-
-  const settingsButtonHandler = (e) =>
-  {
-    e.preventDefault()
-    dispatch(OpenSettingsModalAction())
-  }
+  const settingsButtonHandler = (e) => {
+    e.preventDefault();
+    dispatch(OpenSettingsModalAction());
+  };
 
   return (
     <div className="flex-1 w-full p-2 overflow-scroll scrollbar-hide bg-white ">
@@ -58,7 +52,10 @@ const ProfileBody = () => {
                   {`@${profile?.userName}`}
                 </h3>
                 <div>
-                  <BiCog className="text-xl cursor-pointer hidden tablet:block" onClick={settingsButtonHandler}/>
+                  <BiCog
+                    className="text-2xl cursor-pointer hidden tablet:block text-gray-700 "
+                    onClick={settingsButtonHandler}
+                  />
                 </div>
               </div>
               <button className="border-2 border-gray-500 w-40 px-4 py-2 rounded-md font-bold text-gray-700  ">

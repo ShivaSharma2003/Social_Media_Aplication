@@ -45,9 +45,20 @@ const GetTimelineController = asyncHandler(async (req, res) => {
                     }
                 }
             ])
-            res.status(200).json(CurrentUserPosts.concat({ ...FollowingPosts[0].followingPosts }).sort((a, b) => {
+
+            const TimeLinePosts = CurrentUserPosts.concat({ ...FollowingPosts.FollowingPosts }).sort((a, b) => {
                 return b.createdAt - a.createdAt
-            }))
+            })
+
+            const result = TimeLinePosts.map(async (item) => {
+                const user = await UserModal.findById(item.userId).select("-Password -email -phoneNumber")
+                const timeLinePostResult = { item, user }
+                return timeLinePostResult
+            })
+            Promise.all(result).then(async (result) => {
+                res.status(200).json(result)
+            })
+
         } else {
             res.status(404).json({ Message: "User Not Found" })
         }
@@ -72,7 +83,7 @@ const GetProfileController = asyncHandler(async (req, res) => {
 const GetProfileByIdController = asyncHandler(async (req, res) => {
     const { id } = req.params
     try {
-        const user = await UserModal.findById(id).select("-password").select("-email -phoneNumber -Password")
+        const user = await UserModal.findById(id).select("-email -phoneNumber -Password")
         if (user) {
             res.status(200).json(user)
         } else {
@@ -83,4 +94,17 @@ const GetProfileByIdController = asyncHandler(async (req, res) => {
     }
 })
 
-export { GetTimelineController, GetProfileByIdController, GetProfileController,GetCurrentUserPosts }
+const GetAllUsersController = asyncHandler(async (req, res) => {
+    try {
+        const users = await UserModal.find().select("-email -phoneNumber -Password ")
+        if (users) {
+            res.status(200).json(users)
+        } else {
+            res.status(500).json({ errorMessage: "Internal server error" })
+        }
+    } catch (error) {
+        res.status(500).json({ errorMessage: error.message });
+    }
+})
+
+export { GetTimelineController, GetProfileByIdController, GetProfileController, GetCurrentUserPosts, GetAllUsersController }

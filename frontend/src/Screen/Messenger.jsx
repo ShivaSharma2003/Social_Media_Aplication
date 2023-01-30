@@ -2,15 +2,11 @@ import React, { useEffect } from "react";
 import Navbar from "../Components/Home/Navbar";
 import MessengerBody from "../Components/Messenger/Messengerbody";
 import { useDispatch } from "react-redux";
-import { MessengerNavActive } from "../Redux/Actions/MessengerNavAction";
 import Chat from "./Chat";
 import BottomBar from "../Components/Home/BottomBar";
 
 const Messenger = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(MessengerNavActive());
-  }, [dispatch]);
 
   return (
     <div className="flex flex-col h-full tablet:grid tablet:grid-cols-12 tablet:gap-2">

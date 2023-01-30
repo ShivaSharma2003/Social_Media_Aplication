@@ -3,18 +3,16 @@ import Navbar from "../Components/Home/Navbar";
 import BottomBar from "../Components/Home/BottomBar";
 import Posts from "../Components/Home/Posts";
 import { useDispatch, useSelector } from "react-redux";
-import { ProfileNavDeactive } from "../Redux/Actions/ProfileNavAction";
-import { SettingNavDeactive } from "../Redux/Actions/SettingsNavAction";
-import { MessengerNavDeActive } from "../Redux/Actions/MessengerNavAction";
 import Header from "../Components/Header/Header";
 import { useNavigate } from "react-router-dom";
 import SuggestedUsers from "../Components/Recommendation/SuggestedUsers";
+import { GetProfileAction } from "../Redux/Actions/ProfileAction";
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { Login } = useSelector((state) => state.AuthLogin);
-  
+
   useEffect(() => {
     if (!Login) {
       navigate("/auth/login");
@@ -22,14 +20,12 @@ const Home = () => {
   }, [Login, navigate]);
 
   useEffect(() => {
-    document.title = "Home";
-  }, []);
+    dispatch(GetProfileAction());
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(ProfileNavDeactive());
-    dispatch(SettingNavDeactive());
-    dispatch(MessengerNavDeActive());
-  }, [dispatch]);
+    document.title = "Home";
+  }, []);
 
   return (
     <>
